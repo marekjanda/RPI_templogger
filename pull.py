@@ -1,0 +1,1 @@
+# Script to get the temperature data from the server and writing into a text file
