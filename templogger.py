@@ -1,6 +1,12 @@
 # Mockup to generate motor temperature and store in a dict
 # All temperatures are in DegC
 
+import asyncio
+from json.encoder import JSONEncoder
+import websockets
+import json
+import time
+
 # This definition will come from real temp. monitoring
 T01 = 84 
 T02 = 85 
@@ -32,3 +38,15 @@ temperatures = {
 }
 
 # Send temperatures to a server
+while True:
+    async def hello():
+        uri = "ws://localhost:8765"
+        async with websockets.connect(uri) as websocket:
+            await websocket.send("pull")
+            resp = await websocket.recv()
+            print(resp)
+    
+    asyncio.get_event_loop().run_until_complete(hello())
+    
+    time.sleep(3)
+    #asyncio.get_event_loop().run_forever()
