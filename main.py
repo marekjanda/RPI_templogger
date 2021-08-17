@@ -42,6 +42,8 @@ def generate_temperatures(temps):
         temps[key] = random.randint(70,90)
     return temps
 
+print("Web socket in service")
+
 async def echo(websocket, path):
     async for message in websocket:
         if message == "pull":
@@ -52,7 +54,7 @@ async def echo(websocket, path):
             
             data = json.dumps(temperatures)
             await websocket.send(data)
-            print(message)
+            
             temperatures = generate_temperatures(temperatures)
 
 start_server = websockets.serve(echo, "localhost", 8765)
@@ -60,9 +62,3 @@ start_server = websockets.serve(echo, "localhost", 8765)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
 
-def generate_temperatures(temps):
-    if not temps:
-        return temperatures
-    for key in temps:
-        temps[key] = random.randint(70,90)
-    return temps

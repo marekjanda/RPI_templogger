@@ -23,9 +23,8 @@ while True:
             await websocket.send("pull")
             resp = await websocket.recv()
             temperatures = json.loads(resp)
-            for key in temperatures:
-                print(f"{key} = {temperatures[key]} DegC")
-                log_to_txt(temperatures)
+            print(temperatures)
+            log_to_txt(temperatures)
     
     asyncio.get_event_loop().run_until_complete(hello())
     
