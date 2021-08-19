@@ -17,7 +17,7 @@ def log_to_txt(temps):
 
 # Pull temperatures to a server
 while True:
-    async def hello():
+    async def logger():
         uri = "ws://localhost:8765"
         async with websockets.connect(uri) as websocket:
             await websocket.send("pull")
@@ -26,7 +26,7 @@ while True:
             print(temperatures)
             log_to_txt(temperatures)
     
-    asyncio.get_event_loop().run_until_complete(hello())
+    asyncio.get_event_loop().run_until_complete(logger())
     
     time.sleep(3)
     #asyncio.get_event_loop().run_forever()
