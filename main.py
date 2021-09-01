@@ -39,7 +39,7 @@ def generate_temperatures(temps):
     if not temps:
         return temperatures
     for key in temps:
-        temps[key] = random.uniform(70,90)
+        temps[key] = round(random.uniform(70,90),2)
     return temps
 
 print("Web socket in service")
