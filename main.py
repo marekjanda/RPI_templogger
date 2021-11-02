@@ -46,6 +46,7 @@ print("Web socket in service")
 
 async def echo(websocket, path):
     async for message in websocket:
+        print(f"Pull request: {websocket}")
         if message == "pull":
             try:
                 temperatures = generate_temperatures(temperatures)
@@ -53,11 +54,12 @@ async def echo(websocket, path):
                 temperatures = generate_temperatures(None)
             
             data = json.dumps(temperatures)
+            print(data) 
             await websocket.send(data)
             
             temperatures = generate_temperatures(temperatures)
 
-start_server = websockets.serve(echo, "localhost", 8765)
+start_server = websockets.serve(echo, "localhost", 8765) #localhost to be replaced by RPI IP address (laptop IP 10.103.131.227)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

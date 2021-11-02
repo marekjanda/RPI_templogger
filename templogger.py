@@ -18,7 +18,7 @@ def log_to_txt(temps):
 # Pull temperatures to a server
 while True:
     async def logger():
-        uri = "ws://localhost:8765"
+        uri = "ws://10.103.131.227:8765" #localhost to be replaced by RPI IP address (laptop IP 10.103.131.227)
         async with websockets.connect(uri) as websocket:
             await websocket.send("pull")
             resp = await websocket.recv()
