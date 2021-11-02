@@ -35,6 +35,8 @@ temperatures = {
     "T12": T12,
 }
 
+rpi_address = '10.103.131.227' #This is J&E laptop IP, needs to be replaced with RPI address or localhost
+
 def generate_temperatures(temps):
     if not temps:
         return temperatures
@@ -59,7 +61,7 @@ async def echo(websocket, path):
             
             temperatures = generate_temperatures(temperatures)
 
-start_server = websockets.serve(echo, "localhost", 8765) #localhost to be replaced by RPI IP address (laptop IP 10.103.131.227)
+start_server = websockets.serve(echo, rpi_address, 8765) #localhost to be replaced by RPI IP address (laptop IP 10.103.131.227)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
