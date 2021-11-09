@@ -9,6 +9,7 @@ import time
 rpi_address = '10.103.131.227'
 
 def log_to_txt(temps):
+    '''Writes logged temperatures into a text file'''
     with open("motor_temps.txt", 'w', encoding='utf-8') as f:
         for t in temps:
             if t == "T12":
@@ -20,6 +21,7 @@ def log_to_txt(temps):
 # Pull temperatures to a server
 while True:
     async def logger():
+        '''Pulls temperatures from the RPI websocket'''
         uri = f"ws://{rpi_address}:8765" #localhost to be replaced by RPI IP address (laptop IP 10.103.131.227)
         async with websockets.connect(uri) as websocket:
             await websocket.send("pull")

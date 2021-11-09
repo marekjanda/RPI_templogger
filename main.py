@@ -38,6 +38,7 @@ temperatures = {
 rpi_address = '10.103.131.227' #This is J&E laptop IP, needs to be replaced with RPI address or localhost
 
 def generate_temperatures(temps):
+    '''Will be replace by DAQ'''
     if not temps:
         return temperatures
     for key in temps:
@@ -47,6 +48,7 @@ def generate_temperatures(temps):
 print("Web socket in service")
 
 async def echo(websocket, path):
+    '''Start a websocket service'''
     async for message in websocket:
         print(f"Pull request: {websocket}")
         if message == "pull":
